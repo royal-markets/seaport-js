@@ -149,7 +149,6 @@ export class Seaport {
      */
 
     if (accountAddress) {
-      console.log("here");
       return this.provider.getSigner(accountAddress);
     }
 
