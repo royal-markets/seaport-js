@@ -22,6 +22,7 @@ describeWithFixture("As a user I want to match an order", (fixture) => {
   let offerer: SignerWithAddress;
   let zone: SignerWithAddress;
   let privateListingRecipient: SignerWithAddress;
+
   let privateListingCreateOrderInput: CreateOrderInput;
   let multicallProvider: providers.MulticallProvider;
   const nftId = "1";
@@ -29,12 +30,18 @@ describeWithFixture("As a user I want to match an order", (fixture) => {
   const erc1155ListingQuantity = "1";
 
   beforeEach(async () => {
-    [offerer, zone, privateListingRecipient] = await ethers.getSigners();
+    /**
+     * The first signer is the Seaport.js client signer, so we ignore it
+     * as the client signer is decoupled from the offerer and fulfiller
+     * in matchOrders calls
+     */
+
+    [, offerer, zone, privateListingRecipient] = await ethers.getSigners();
 
     multicallProvider = new providers.MulticallProvider(ethers.provider);
   });
 
-  describe("A single ERC721 is to be transferred", async () => {
+  describe.only("A single ERC721 is to be transferred", async () => {
     describe("[Buy now] I want to buy a single ERC721 private listing", async () => {
       beforeEach(async () => {
         const { testErc721 } = fixture;
@@ -193,7 +200,7 @@ describeWithFixture("As a user I want to match an order", (fixture) => {
     });
   });
 
-  describe("A single ERC1155 is to be transferred", async () => {
+  describe.only("A single ERC1155 is to be transferred", async () => {
     describe("[Buy now] I want to buy a single ERC1155 private listing", async () => {
       beforeEach(async () => {
         const { testErc1155 } = fixture;
