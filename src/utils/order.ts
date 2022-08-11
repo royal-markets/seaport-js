@@ -1,5 +1,6 @@
 import { BigNumber, BigNumberish, ethers } from "ethers";
 import { ItemType, ONE_HUNDRED_PERCENT_BP } from "../constants";
+import { Seaport__factory } from "../typechain";
 import type {
   ConsiderationItem,
   CreateInputItem,
